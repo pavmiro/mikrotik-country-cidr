@@ -41,13 +41,13 @@ wget -c -O - ftp://ftp.ripe.net/ripe/stats/`date -d "yesterday" "+%Y"`/delegated
 Удаление старого списка, загрузка и импортно нового списка:
 ```routeros
 /ip firewall address-list remove [find where list=RU];\
-/tool fetch url=https://github.com/pavmiro/mikrotik-country-cidr/raw/refs/heads/main/RIPE-RU-latest.rsc;\
+/tool fetch url=https://raw.githubusercontent.com/pavmiro/mikrotik-country-cidr/refs/heads/main/RIPE-RU-latest.rsc;\
 /import RIPE-RU-latest.rsc
 ```
 Автоматическое скачивание и импорт списка при загрузке роутера:
 ```routeros
 /system scheduler
 add name=schedule1 start-time=startup on-event="/delay 15\r\
-    \n/tool/fetch url=https://github.com/pavmiro/mikrotik-country-cidr/raw/refs/heads/main/RIPE-RU-latest.rsc\r\
+    \n/tool/fetch url=https://raw.githubusercontent.com/pavmiro/mikrotik-country-cidr/refs/heads/main/RIPE-RU-latest.rsc\r\
     \n/import RIPE-RU-latest.rsc"
 ```
