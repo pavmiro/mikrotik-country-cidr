@@ -38,14 +38,13 @@ wget -c -O - ftp://ftp.ripe.net/ripe/stats/`date -d "yesterday" "+%Y"`/delegated
 
 ## 🚀 Пример использования
 
-Скачивание и импорт списка для России (файл от 20 июня 2026):
-
+Удаление старого списка, загрузка и импортно нового списка:
 ```routeros
-/tool fetch url=https://github.com/pavmiro/mikrotik-country-cidr/raw/refs/heads/main/RU/RIPE-RU-20-Jun-2026.rsc
-/import RIPE-RU-20-Jun-2026.rsc
+/ip firewall address-list remove [find where list=RU];\
+/tool fetch url=https://github.com/pavmiro/mikrotik-country-cidr/raw/refs/heads/main/RIPE-RU-latest.rsc;\
+/import RIPE-RU-latest.rsc
 ```
 Автоматическое скачивание и импорт списка при загрузке роутера:
-
 ```routeros
 /system scheduler
 add name=schedule1 start-time=startup on-event="/delay 15\r\
